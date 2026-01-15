@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Смирнов Ярослав — Программист C++/Qt</title>
+    <meta name="description"
+        content="Смирнов Ярослав — программист C++ (C++20), Qt, Boost. Опыт разработки VoIP и системного ПО под Linux/Astra Linux." />
+    <meta name="theme-color" content="#0b1220" />
+
+    <style>
+        :root {
+            --bg0: #070b16;
+            --bg1: #0b1220;
+            --card: #0f1a33cc;
+            --text: #e9eefc;
+            --muted: #aab6da;
+            --line: #24345f;
+            --accent: #7c5cff;
+            --accent2: #22d3ee;
+            --good: #34d399;
+            --shadow: 0 18px 60px rgba(0, 0, 0, .45);
+            --radius: 18px;
+            --w: 1080px;
+            --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--sans);
+            color: var(--text);
+            background:
+                radial-gradient(1200px 600px at 70% 10%, rgba(124, 92, 255, .28), transparent 55%),
+                radial-gradient(900px 500px at 15% 30%, rgba(34, 211, 238, .18), transparent 55%),
+                radial-gradient(900px 650px at 70% 80%, rgba(52, 211, 153, .12), transparent 60%),
+                linear-gradient(180deg, var(--bg0), var(--bg1));
+            min-height: 100svh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .wrap {
+            width: min(var(--w), calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+            background: linear-gradient(180deg, rgba(7, 11, 22, .85), rgba(7, 11, 22, .55));
+            border-bottom: 1px solid rgba(36, 52, 95, .6);
+        }
+
+        .nav .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 350px;
+            height: 350px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(36, 52, 95, .85);
+            background: rgba(7, 11, 22, .35);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            /* если вдруг подставишь не квадрат — обрежет красиво */
+        }
+
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            letter-spacing: .2px;
+        }
+
+        .logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
+            background: conic-gradient(from 210deg, var(--accent), var(--accent2), var(--good), var(--accent));
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, .08) inset;
+        }
+
+        .menu {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .chip {
+            padding: 9px 12px;
+            border: 1px solid rgba(36, 52, 95, .9);
+            background: rgba(15, 26, 51, .55);
+            border-radius: 999px;
+            color: var(--muted);
+            transition: .2s ease;
+            font-size: 14px;
+        }
+
+        .chip:hover {
+            transform: translateY(-1px);
+            border-color: rgba(124, 92, 255, .9);
+            color: var(--text);
+        }
+
+        header {
+            padding: 34px 0 10px;
+        }
+
+        .hero {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: 1.45fr .85fr;
+            align-items: stretch;
+        }
+
+        @media (max-width: 860px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(15, 26, 51, .55);
+            border: 1px solid rgba(36, 52, 95, .85);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-main {
+            padding: 26px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-main:before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background: radial-gradient(600px 200px at 30% 0%, rgba(124, 92, 255, .25), transparent 60%),
+                radial-gradient(500px 220px at 90% 20%, rgba(34, 211, 238, .18), transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-main>* {
+            position: relative;
+        }
+
+        .kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--mono);
+            color: var(--muted);
+            font-size: 13px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(36, 52, 95, .85);
+            background: rgba(7, 11, 22, .35);
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: var(--good);
+            box-shadow: 0 0 0 6px rgba(52, 211, 153, .12);
+        }
+
+        h1 {
+            margin: 14px 0 10px;
+            font-size: clamp(28px, 4vw, 44px);
+            line-height: 1.08;
+            letter-spacing: -.6px;
+        }
+
+        .subtitle {
+            margin: 0 0 16px;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.55;
+            max-width: 62ch;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 14px 0 18px;
+        }
+
+        .badge {
+            font-family: var(--mono);
+            font-size: 13px;
+            padding: 8px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(36, 52, 95, .85);
+            background: rgba(7, 11, 22, .35);
+            color: var(--text);
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(36, 52, 95, .85);
+            background: rgba(7, 11, 22, .35);
+            color: var(--text);
+            transition: .2s ease;
+            font-weight: 650;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            border-color: rgba(124, 92, 255, .95);
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, rgba(124, 92, 255, .95), rgba(34, 211, 238, .55));
+            border-color: rgba(255, 255, 255, .14);
+        }
+
+        .btn small {
+            color: rgba(255, 255, 255, .85);
+            font-weight: 600;
+        }
+
+        .hero-side {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .mini {
+            padding: 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(36, 52, 95, .85);
+            background: rgba(7, 11, 22, .35);
+        }
+
+        .mini h3 {
+            margin: 0 0 10px;
+            font-size: 14px;
+            letter-spacing: .2px;
+            color: var(--muted);
+            font-family: var(--mono);
+        }
+
+        .kv {
+            display: grid;
+            gap: 8px;
+        }
+
+        .kv div {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .kv span {
+            color: var(--muted);
+        }
+
+        .kv b {
+            font-weight: 700;
+        }
+
+        main {
+            padding: 14px 0 56px;
+        }
+
+        section {
+            margin-top: 16px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 18px 0 10px;
+        }
+
+        .section-title h2 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: .2px;
+        }
+
+        .section-title p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            font-family: var(--mono);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        @media (max-width: 860px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .box {
+            padding: 18px;
+        }
+
+        .box h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .list {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .pillset {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .pill {
+            font-size: 13px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(36, 52, 95, .85);
+            background: rgba(7, 11, 22, .35);
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 12px;
+        }
+
+        .job {
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(36, 52, 95, .85);
+            background: rgba(7, 11, 22, .35);
+        }
+
+        .jobhead {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .jobhead b {
+            font-size: 15px;
+        }
+
+        .jobhead span {
+            color: var(--muted);
+            font-family: var(--mono);
+            font-size: 12.5px;
+        }
+
+        .job p {
+            margin: 10px 0 0;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        footer {
+            padding: 22px 0 30px;
+            color: var(--muted);
+        }
+
+        .foot {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(36, 52, 95, .6);
+            padding-top: 16px;
+        }
+
+        .mono {
+            font-family: var(--mono);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="wrap">
+            <div class="row">
+                <div class="brand">
+                    <div class="logo" aria-hidden="true"></div>
+                    <div>Смирнов Ярослав</div>
+                </div>
+                <nav class="menu" aria-label="Навигация">
+                    <a class="chip" href="#about">Обо мне</a>
+                    <a class="chip" href="#skills">Навыки</a>
+                    <a class="chip" href="#exp">Опыт</a>
+                    <a class="chip" href="#edu">Образование</a>
+                    <a class="chip" href="#contacts">Контакты</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- schema.org Person via microdata -->
+    <header class="wrap" id="top" itemscope itemtype="https://schema.org/Person">
+        <div class="hero">
+            <div class="card hero-main">
+                <div class="kicker"><span class="dot" aria-hidden="true"></span><span class="mono">C++/Qt • C++20 •
+                        Boost • Linux</span></div>
+
+                <h1 itemprop="name">Смирнов Ярослав</h1>
+                <div class="badges" aria-label="">
+                    <div class="badge">Программист C++ (Qt, Boost, C++20)</div>
+                    <div class="badge">Программное обеспечение для VoIP‑телефонии</div>
+                    <div class="badge">Системные/прикладные решения под Linux</div>
+                </div>
+
+                <div class="actions">
+                    <a class="btn primary" href="mailto:d3156@mail.ru" itemprop="email" aria-label="Написать на почту">
+                        Написать <small>d3156@mail.ru</small>
+                    </a>
+                    <a class="btn" href="tel:+79026139228" itemprop="telephone" aria-label="Позвонить">
+                        Позвонить <small>+7 902 613‑92‑28</small>
+                    </a>
+                    <a class="btn" href="https://github.com/d3156" target="_blank" rel="noreferrer">
+                        GitHub
+                    </a>
+                </div>
+            </div>
+
+            <aside class="card hero-side" id="contacts">
+                <div class="mini">
+
+                    <div class="avatar">
+                        <img src="./photo.jpg" alt="Смирнов Ярослав" width="256" height="256" loading="lazy"
+                            decoding="async">
+                    </div>
+
+                </div>
+                <div class="mini">
+                    <h3>Фокус</h3>
+                    <div class="pillset">
+                        <div class="pill">VoIP</div>
+                        <div class="pill">TCP/IP</div>
+                        <div class="pill">Linux</div>
+                        <div class="pill">Qt Widgets/QtCore</div>
+                        <div class="pill">STL</div>
+                        <div class="pill">ООП</div>
+                        <div class="pill">Рефакторинг</div>
+                        <div class="pill">Декомпозиция</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <section id="about" class="card box">
+            <div class="section-title">
+                <h2>Обо мне</h2>
+            </div>
+            <ul class="list">
+                <li>Инженер‑программист C++: разработка прикладного и системного ПО, UI на Qt, сетевые компоненты.</li>
+                <li>Интересы: VoIP, протоколы, надежность и качество кода (рефакторинг, декомпозиция задач).</li>
+                <li>ОС: Linux, опыт работы под Astra Linux SE 1.6.</li>
+            </ul>
+        </section>
+
+        <section id="skills">
+            <div class="section-title">
+                <h2>Навыки</h2>
+                <p>Стек и инструменты</p>
+            </div>
+
+            <div class="grid">
+                <div class="card box">
+                    <h3>Основное</h3>
+                    <div class="pillset" aria-label="Основной стек">
+                        <div class="pill">C/C++</div>
+                        <div class="pill">C++20</div>
+                        <div class="pill">Qt</div>
+                        <div class="pill">Boost</div>
+                        <div class="pill">STL</div>
+                        <div class="pill">TCP/IP</div>
+                        <div class="pill">Linux</div>
+                        <div class="pill">ООП</div>
+                    </div>
+                </div>
+
+                <div class="card box">
+                    <h3>Инженерные практики</h3>
+                    <div class="pillset" aria-label="Практики">
+                        <div class="pill">Разработка ПО</div>
+                        <div class="pill">Рефакторинг кода</div>
+                        <div class="pill">Декомпозиция задач</div>
+                        <div class="pill">Проектирование сложных ИС</div>
+                        <div class="pill">Разработка ГИС</div>
+                    </div>
+                </div>
+
+                <div class="card box">
+                    <h3>Инструменты</h3>
+                    <div class="pillset" aria-label="Инструменты">
+                        <div class="pill">Git</div>
+                        <div class="pill">SVN</div>
+                        <div class="pill">Bash</div>
+                        <div class="pill">Python</div>
+                        <div class="pill">Visual Studio code</div>
+                        <div class="pill">Clion</div>
+                        <div class="pill">Atlassian Jira</div>
+                        <div class="pill">Atlassian Confluence</div>
+                        <div class="pill">Linux kernel</div>
+                    </div>
+                </div>
+sudo certbot certonly --webroot -w /var/www/letsencrypt   -d yaroslavsmirnov.digital   --email yarsmirnov59@gmail.com --agree-tos --no-eff-email
+                <div class="card box">
+                    <h3>Дополнительно</h3>
+                    <div class="pillset" aria-label="Дополнительно">
+                        <div class="pill">Astra Linux SE 1.6</div>
+                        <div class="pill">Разработка ГИС</div>
+                        <div class="pill">Управление проектами</div>
+                        <div class="pill">Управление командой</div>
+                        <div class="pill">Rust</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="exp" class="card box">
+            <div class="section-title">
+                <h2>Опыт</h2>
+            </div>
+
+            <div class="timeline" aria-label="Опыт работы">
+                <div class="job">
+                    <div class="jobhead">
+                        <b>НЕОС — Инженер‑программист</b>
+                        <span>Июль 2025 — сейчас (7 месяцев)</span>
+                    </div>
+                    <p>Разработка ПО в области VoIP‑телефонии.</p>
+                </div>
+
+                <div class="job">
+                    <div class="jobhead">
+                        <b>NDA — Инженер‑программист</b>
+                        <span>Август 2022 — Июль 2025 (3 года)</span>
+                    </div>
+                    <p>Разработка СПО на C++/Qt.</p>
+                </div>
+
+                <div class="job">
+                    <div class="jobhead">
+                        <b>ЭВРИКА (Санкт‑Петербург) — Инженер‑программист</b>
+                        <span>Июнь 2021 — сентябрь 2023 (2 года 4 месяца)</span>
+                    </div>
+                    <p>
+                        Разработка и тестирование проприетарного протокола пакетной передачи данных для комплекса
+                        технических средств систем специальной связи (Astra Linux SE 1.6).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="edu" class="card box">
+            <div class="section-title">
+                <h2>Образование</h2>
+                <p>Вуз и специализация</p>
+            </div>
+            <ul class="list">
+                <li>СПбГЭТУ «ЛЭТИ» им. В. И. Ульянова (Ленина), Санкт‑Петербург.</li>
+                <li>Специальность: 10.05.01 — Компьютерная безопасность.</li>
+                <li>Год окончания: 2025 (высшее).</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="wrap" itemscope itemtype="https://schema.org/Person">
+        <div class="foot">
+            <div>
+                <div class="mono">© <span id="y"></span> <span itemprop="name">Смирнов Ярослав</span></div>
+                <div class="mono" style="margin-top:6px;">Email: <a itemprop="email"
+                        href="mailto:d3156@mail.ru">d3156@mail.ru</a></div>
+            </div>
+            <div class="mono">
+                <a class="chip" href="#top">Наверх</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const email = "d3156@mail.ru";
+        document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
