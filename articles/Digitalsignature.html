@@ -10,8 +10,10 @@
     <meta name="theme-color" content="#0b1220" />
     <link rel="stylesheet" href="./../assets/css/base.css">
     <link rel="stylesheet" href="./../assets/css/artilces.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
 </head>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 <body>
     <div class="nav">
         <div class="wrap">
@@ -120,7 +122,7 @@
                 историю браузера, referrer и сторонние системы мониторинга.
             </div>
 
-            <pre><code>// Паттерн из документации (упрощённо):
+            <pre><code class="language-php">// Паттерн из документации (упрощённо):
 sign = md5(merchant_id + ":" + amount + ":" + secret + ":" + currency + ":" + order_id)
 webhook_sign = md5(merchant_id + ":" + amount + ":" + secret2 + ":" + order_id)</code></pre>
 
@@ -142,7 +144,7 @@ webhook_sign = md5(merchant_id + ":" + amount + ":" + secret2 + ":" + order_id)<
                         href="https://docs.freekassa.net/" target="_blank" rel="noreferrer">Источник</a></span>
             </p>
 
-            <pre><code>// Пример паттерна из документации (PHP):
+            <pre><code class="language-php">// Пример паттерна из документации (PHP):
 ksort(data)
 signature = HMAC_SHA256( implode("|", data_values), api_key )</code></pre>
 

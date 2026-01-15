@@ -10,9 +10,11 @@
   <meta name="theme-color" content="#0b1220" />
   <link rel="stylesheet" href="./../assets/css/base.css">
   <link rel="stylesheet" href="./../assets/css/artilces.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
   <style> </style>
 </head>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 <body>
   <div class="nav">
     <div class="wrap">
@@ -113,7 +115,7 @@
       <p>Пару полей можно было искать вручную, но для полного разбора протокола нужно не случайное совпадение, а
         статистически подтверждённый факт. </p>
 
-      <pre><code># Примеры сценариев использования (схематично)
+      <pre><code class="language-bash"># Примеры сценариев использования (схематично)
 
 # 1) Вывести список найденных чисел по типам:
 ./integerfinder -f ../test.hex -l
