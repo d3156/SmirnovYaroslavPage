@@ -74,9 +74,13 @@
             gap: 12px;
         }
 
+        /* было: width:350px; height:450px; */
         .avatar {
-            width: 350px;
-            height: 450px;
+            width: min(320px, 100%);
+            aspect-ratio: 3 / 4;
+            /* квадрат, если хочешь 256x256 как планировал */
+            height: auto;
+
             border-radius: 18px;
             overflow: hidden;
             border: 1px solid rgba(36, 52, 95, .85);
@@ -88,8 +92,8 @@
             height: 100%;
             display: block;
             object-fit: cover;
-            /* если вдруг подставишь не квадрат — обрежет красиво */
         }
+
 
 
         .brand {
@@ -430,56 +434,68 @@
             font-family: var(--mono);
         }
 
-        .pill-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
+        .pill-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
 
-  padding: 11px 14px;                /* чуть крупнее кликабельная зона */
-  border-radius: 15px;
+            padding: 11px 14px;
+            /* чуть крупнее кликабельная зона */
+            border-radius: 15px;
 
-  background: rgba(124,92,255,.16);   /* заметнее, чем просто "плашка" */
-  border: 1px solid rgba(124,92,255,.55);
+            background: rgba(124, 92, 255, .16);
+            /* заметнее, чем просто "плашка" */
+            border: 1px solid rgba(124, 92, 255, .55);
 
-  color: var(--text);
-  font-weight: 450;
+            color: var(--text);
+            font-weight: 450;
 
-  box-shadow:
-    0 10px 24px rgba(0,0,0,.22),
-    0 0 0 1px rgba(255,255,255,.06) inset;
+            box-shadow:
+                0 10px 24px rgba(0, 0, 0, .22),
+                0 0 0 1px rgba(255, 255, 255, .06) inset;
 
-  cursor: pointer;
-  transition: transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
-}
+            cursor: pointer;
+            transition: transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
+        }
 
-/* стрелка — сильный сигнал "это ссылка/переход" */
-.pill-btn::after{
-  content: "→";
-  font-family: var(--mono);
-  opacity: .85;
-}
+        /* стрелка — сильный сигнал "это ссылка/переход" */
+        .pill-btn::after {
+            content: "→";
+            font-family: var(--mono);
+            opacity: .85;
+        }
 
-/* hover */
-.pill-btn:hover{
-  transform: translateY(-1px);
-  background: rgba(124,92,255,.24);
-  border-color: rgba(34,211,238,.65);
-  box-shadow:
-    0 14px 30px rgba(0,0,0,.28),
-    0 0 0 1px rgba(255,255,255,.08) inset;
-}
+        /* hover */
+        .pill-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(124, 92, 255, .24);
+            border-color: rgba(34, 211, 238, .65);
+            box-shadow:
+                0 14px 30px rgba(0, 0, 0, .28),
+                0 0 0 1px rgba(255, 255, 255, .08) inset;
+        }
 
-/* active (нажатие) */
-.pill-btn:active{
-  transform: translateY(0px) scale(.99);
-}
+        /* active (нажатие) */
+        .pill-btn:active {
+            transform: translateY(0px) scale(.99);
+        }
 
-/* keyboard focus: заметная обводка только когда нужно */
-.pill-btn:focus-visible{
-  outline: 3px solid rgba(34,211,238,.55);
-  outline-offset: 3px;
-}
+        /* keyboard focus: заметная обводка только когда нужно */
+        .pill-btn:focus-visible {
+            outline: 3px solid rgba(34, 211, 238, .55);
+            outline-offset: 3px;
+        }
 
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -521,10 +537,12 @@
                 <div class="mini">
                     <h3>Технические статьи</h3>
                     <div class="pillset">
-                        <div class="pill-btn" href="./articles/Digitalsignature.html" >Secure code review: аудит реализации цифровой подписи</div>
-                        <div class="pill-btn" href="./articles/ModuleExtender.html" >Модульная расширяемая архитектура</div>
-                        <div class="pill-btn" href="./articles/PlaginLoading.html" >Плагинная архитектура</div>
-                        <div class="pill-btn" href="./articles/Tooling.html" >Инструменты разработки (Tooling)</div>
+                        <div class="pill-btn" href="./articles/Digitalsignature.html">Secure code review: аудит
+                            реализации цифровой подписи</div>
+                        <div class="pill-btn" href="./articles/ModuleExtender.html">Модульная расширяемая архитектура
+                        </div>
+                        <div class="pill-btn" href="./articles/PlaginLoading.html">Плагинная архитектура</div>
+                        <div class="pill-btn" href="./articles/Tooling.html">Инструменты разработки (Tooling)</div>
                     </div>
                 </div>
 
