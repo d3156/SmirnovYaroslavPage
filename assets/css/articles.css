@@ -90,7 +90,6 @@ code {
   }
 }
 
-/* По умолчанию: кнопка "на главную" выглядит как обычный chip с текстом */
 .article-nav .nav-home{
   display: inline-flex;
 }
@@ -98,22 +97,24 @@ code {
   display: inline;
 }
 
-/* Мобилка: оставляем только кнопку домой, и делаем её компактной */
 @media (max-width: 520px){
-  .article-nav .chip{ display:none; }
-  .article-nav .nav-home{ display:inline-flex; }
+  /* Шапка: бренд сверху, меню отдельной строкой */
+  .nav .row{ flex-wrap: wrap; }
 
-  .article-nav .nav-home-text{ display:none; }
-
-  .article-nav .nav-home{
-    padding: 8px 10px;
-    min-width: 40px;
-    height: 36px;
-    border-radius: 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
+  /* Меню статей — одной линией, со скроллом */
+  .article-nav{
+    flex: 1 1 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    gap: 8px;
   }
-}
+  .article-nav::-webkit-scrollbar{ height: 0; }
 
+  /* Кнопка домой не должна переноситься/сжиматься */
+  .article-nav .nav-home{
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
 }
