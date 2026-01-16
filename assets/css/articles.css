@@ -81,6 +81,7 @@ code {
 .nav-home .icon{
   width: 18px;
   height: 18px;
+  display: block;
 }
 
 @media (min-width: 860px) {
@@ -89,19 +90,30 @@ code {
   }
 }
 
-/* Мобильный режим: оставляем только кнопку "домой" и делаем её маленькой */
-@media (max-width: 860px){
+/* По умолчанию: кнопка "на главную" выглядит как обычный chip с текстом */
+.article-nav .nav-home{
+  display: inline-flex;
+}
+.article-nav .nav-home-text{
+  display: inline;
+}
+
+/* Мобилка: оставляем только кнопку домой, и делаем её компактной */
+@media (max-width: 520px){
   .article-nav .chip{ display:none; }
   .article-nav .nav-home{ display:inline-flex; }
 
-  .nav-home-text{ display:none; }
+  .article-nav .nav-home-text{ display:none; }
 
-  .nav-home{
-    padding: 8px 10px;     /* компактно */
-    border-radius: 12px;   /* без огромного круга */
+  .article-nav .nav-home{
+    padding: 8px 10px;
     min-width: 40px;
-    height: 36px;          /* фикс высоты */
-    align-items: center;
+    height: 36px;
+    border-radius: 12px;
     justify-content: center;
+    align-items: center;
+    gap: 0;
   }
+}
+
 }
