@@ -202,6 +202,12 @@
             max-width: 100%;
             height: auto;
         }
+
+        @media (max-width: 520px) {
+            .home-nav {
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -216,7 +222,7 @@
                     </span>
                     <div id="rotating" class="wipe"></div>
                 </div>
-                <nav class="menu" aria-label="Навигация">
+                <nav class="menu home-nav" aria-label="Навигация">
                     <a class="chip" href="#about">Обо мне</a>
                     <a class="chip" href="#skills">Навыки</a>
                     <a class="chip" href="#exp">Опыт</a>

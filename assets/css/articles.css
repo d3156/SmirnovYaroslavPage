@@ -78,8 +78,26 @@ code {
   gap: 14px;
 }
 
+.icon{
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
 @media (min-width: 860px) {
   .more-articles {
     grid-template-columns: 1fr 1fr;
+  }
+  .article-nav .chip{ display:none; }
+  .article-nav .nav-home{ display:inline-flex; }
+    /* Прячем текст — остаётся иконка */
+  .nav-home-text{ display:none; }
+
+  /* Делаем кнопку компактнее */
+  .nav-home.icon-only{
+    padding: 9px 10px;
+    border-radius: 12px;
+    min-width: 40px;
+    justify-content: center;
   }
 }
