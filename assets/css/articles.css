@@ -97,7 +97,7 @@ code {
   display: inline;
 }
 
-@media (max-width: 520px){
+@media (max-width: 860px){
   /* Шапка: бренд сверху, меню отдельной строкой */
   .nav .row{ flex-wrap: wrap; }
 
