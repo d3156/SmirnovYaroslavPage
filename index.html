@@ -11,205 +11,7 @@
     <meta name="theme-color" content="#0b1220" />
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/logo.css">
-    <style>
-        /* было: width:350px; height:450px; */
-        .avatar {
-            width: min(320px, 100%);
-            aspect-ratio: 3 / 4;
-            /* квадрат, если хочешь 256x256 как планировал */
-            height: auto;
-
-            border-radius: 18px;
-            overflow: hidden;
-            border: 1px solid rgba(36, 52, 95, .85);
-            background: rgba(7, 11, 22, .35);
-        }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-        }
-
-        header {
-            padding: 34px 0 10px;
-        }
-
-        .hero {
-            display: grid;
-            gap: 18px;
-            grid-template-columns: 1.45fr .85fr;
-            align-items: stretch;
-        }
-
-
-        .hero-main {
-            padding: 26px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-main:before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            background: radial-gradient(600px 200px at 30% 0%, rgba(124, 92, 255, .25), transparent 60%),
-                radial-gradient(500px 220px at 90% 20%, rgba(34, 211, 238, .18), transparent 60%);
-            pointer-events: none;
-        }
-
-        .hero-main>* {
-            position: relative;
-        }
-
-        @media (max-width: 860px) {
-            .hero {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        h1 {
-            margin: 14px 0 10px;
-            font-size: clamp(28px, 4vw, 44px);
-            line-height: 1.08;
-            letter-spacing: -.6px;
-        }
-
-        .subtitle {
-            margin: 0 0 16px;
-            color: var(--muted);
-            font-size: 16px;
-            line-height: 1.55;
-            max-width: 62ch;
-        }
-
-        .actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 14px;
-            border-radius: 14px;
-            border: 1px solid rgba(36, 52, 95, .85);
-            background: rgba(7, 11, 22, .35);
-            color: var(--text);
-            transition: .2s ease;
-            font-weight: 650;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            border-color: rgba(124, 92, 255, .95);
-        }
-
-        .btn.primary {
-            background: linear-gradient(135deg, rgba(124, 92, 255, .95), rgba(34, 211, 238, .55));
-            border-color: rgba(255, 255, 255, .14);
-        }
-
-        .btn small {
-            color: rgba(255, 255, 255, .85);
-            font-weight: 600;
-        }
-
-        .hero-side {
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .mini {
-            padding: 14px;
-            border-radius: 16px;
-            border: 1px solid rgba(36, 52, 95, .85);
-            background: rgba(7, 11, 22, .35);
-        }
-
-        .mini h3 {
-            margin: 0 0 10px;
-            font-size: 14px;
-            letter-spacing: .2px;
-            color: var(--muted);
-            font-family: var(--mono);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        @media (max-width: 860px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .box h3 {
-            margin: 0 0 10px;
-            font-size: 16px;
-        }
-
-        .timeline {
-            display: grid;
-            gap: 12px;
-        }
-
-        .job {
-            padding: 16px;
-            border-radius: 16px;
-            border: 1px solid rgba(36, 52, 95, .85);
-            background: rgba(7, 11, 22, .35);
-        }
-
-        .jobhead {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .jobhead b {
-            font-size: 15px;
-        }
-
-        .jobhead span {
-            color: var(--muted);
-            font-family: var(--mono);
-            font-size: 12.5px;
-        }
-
-        .job p {
-            margin: 10px 0 0;
-            color: var(--muted);
-            line-height: 1.55;
-        }
-
-        html,
-        body {
-            overflow-x: hidden;
-            width: 100%;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        @media (max-width: 520px) {
-            .home-nav {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./assets/css/index.css">
 </head>
 
 <body>
@@ -233,53 +35,45 @@
             </div>
         </div>
     </div>
-
-    <!-- schema.org Person via microdata -->
     <header class="wrap" id="top" itemscope itemtype="https://schema.org/Person">
         <div class="hero">
             <div class="card hero-main">
                 <div class="kicker"><span class="dot" aria-hidden="true"></span><span class="mono">C++/Qt • C++20 •
                         Boost • Linux</span></div>
-
-                <h1 itemprop="name">Смирнов Ярослав</h1>
+                <h1 itemprop="name">Смирнов Ярослав
+                    <a title="GitHub" href="https://github.com/d3156" target="_blank" id="contacts"><img
+                            src="./assets/img/Gihub.svg" /></a>
+                    <a title="Telegram" href="https://t.me/YS3156" target="_blank"><img
+                            src="./assets/img/Telegram.svg" /></a>
+                    <a title="Telegram" href="mailto:d3156@mail.ru" target="_blank"><img
+                            src="./assets/img/mail.svg" /></a>
+                </h1>
                 <div class="badges" aria-label="">
                     <div class="badge">C++ (Qt, Boost, C++20)</div>
                     <div class="badge">Системные/прикладные решения под Linux</div>
                     <div class="badge">Безопасность/криптография: Hash, ЭЦП, PKI, TLS.</div>
-                    <div class="badge">Программное обеспечение для VoIP‑телефонии</div>
+                    <div class="badge">Программное обеспечение для VoIP-телефонии</div>
                     <div class="badge">Docker, docker-compose</div>
                     <div class="badge">Nginx: reverse proxy, TLS/HTTPS, HTTP/2</div>
                 </div>
                 <div class="mini">
                     <h3>Технические статьи</h3>
                     <div class="pillset">
-                        <a class="pill-btn" href="./articles/Digitalsignature.html">Secure code review: аудит
+                        <a class="btn primary" href="./articles/Digitalsignature.html">Secure code review: аудит
                             реализации цифровой подписи</a>
-                        <a class="pill-btn" href="./articles/Tooling.html">Инструменты разработки (Tooling)</a>
-                        <a class="pill-btn" href="./articles/PlaginCore.html">Плагинная архитектура</a>
-                        <a class="pill-btn" href="./articles/ModuleExtender.html">Модульная расширяемая архитектура
+                        <a class="btn primary" href="./articles/Tooling.html">Инструменты разработки (Tooling)</a>
+                        <a class="btn primary" href="./articles/PlaginCore.html">Плагинная архитектура</a>
+                        <a class="btn primary" href="./articles/ModuleExtender.html">Модульная расширяемая архитектура
                         </a>
                     </div>
                 </div>
-
-                <div class="actions">
-                    <a class="btn" href="https://github.com/d3156" target="_blank" rel="noreferrer">
-                        GitHub
-                    </a>
-                    <a class="btn primary" href="mailto:d3156@mail.ru" itemprop="email" aria-label="Написать на почту">
-                        Написать <small>d3156@mail.ru</small>
-                    </a>
-                </div>
             </div>
-
-            <aside class="card hero-side" id="contacts">
+            <aside class="card hero-side">
                 <div class="mini">
-
                     <div class="avatar">
                         <img src="./assets/img/photo.jpg" alt="Смирнов Ярослав" width="256" height="256" loading="lazy"
                             decoding="async">
                     </div>
-
                 </div>
                 <div class="mini">
                     <h3>Фокус</h3>
@@ -291,7 +85,6 @@
                         <div class="pill">STL</div>
                         <div class="pill">ООП</div>
                         <div class="pill">Рефакторинг</div>
-                        <div class="pill">Декомпозиция</div>
                     </div>
                 </div>
             </aside>
@@ -304,9 +97,8 @@
                 <h2>Обо мне</h2>
             </div>
             <ul class="list">
-                <li>Инженер‑программист C++: разработка прикладного и системного ПО, UI на Qt, сетевые компоненты.</li>
-                <li>Интересы: VoIP, протоколы, надежность и качество кода (рефакторинг, декомпозиция задач).</li>
-                <li>ОС: Linux, опыт работы под Astra Linux SE 1.6.</li>
+                Быстро погружаюсь в новые прикладные области. Автоматизирую свою работу и всегда стремлюсь помочь коллегам.
+                Имею опыт управления командой разработчиков из 3 человек. Умею разработывать как Backend, так и GUI-ориентированных приложений.
             </ul>
         </section>
 
@@ -322,49 +114,58 @@
                     <div class="pillset" aria-label="Основной стек">
                         <div class="pill">C/C++</div>
                         <div class="pill">C++20</div>
-                        <div class="pill">Qt</div>
                         <div class="pill">Boost</div>
-                        <div class="pill">STL</div>
+                        <div class="pill">Qt</div>
                         <div class="pill">TCP/IP</div>
-                        <div class="pill">Linux</div>
                         <div class="pill">ООП</div>
+                    </div>
+                </div>
+                <div class="card box">
+                    <h3>Операционные системы</h3>
+                    <div class="pillset" aria-label="Опыт работы с ОС">
+                        <div class="pill">Ubuntu 22/24</div>
+                        <div class="pill">Astra Linux SE</div>
+                        <div class="pill">Windows 7/10</div>
+                    </div>
+                </div>
+                <div class="card box">
+                    <h3>Знакомые языки</h3>
+                    <div class="pillset" aria-label="Языки программирования (чтение кода, изучение)">
+                        <div class="pill">Rust</div>
+                        <div class="pill">Python</div>
+                        <div class="pill">Bash</div>
+                        <div class="pill">C# (.Net)</div>
+                        <div class="pill">Lua</div>
+                        <div class="pill">Pascal</div>
+                        <div class="pill">Java</div>
+                    </div>
+                </div>
+
+                <div class="card box">
+                    <h3>Контроль версий</h3>
+                    <div class="pillset" aria-label="Системы контроля версий">
+                        <div class="pill">SVN</div>
+                        <div class="pill">Git</div>
+                        <div class="pill">GitHub API</div>
+                        <div class="pill">GitLab</div>
                     </div>
                 </div>
 
                 <div class="card box">
                     <h3>Инженерные практики</h3>
                     <div class="pillset" aria-label="Практики">
-                        <div class="pill">Разработка ПО</div>
-                        <div class="pill">Рефакторинг кода</div>
-                        <div class="pill">Декомпозиция задач</div>
-                        <div class="pill">Разработка модульных приложений</div>
-                        <div class="pill">Разработка ГИС</div>
+                        <div class="pill">Модульные приложения</div>
+                        <div class="pill">VoIP</div>
+                        <div class="pill">Геоинформационные системы</div>
                     </div>
                 </div>
-
                 <div class="card box">
-                    <h3>Инструменты</h3>
+                    <h3>IDE</h3>
                     <div class="pillset" aria-label="Инструменты">
-                        <div class="pill">Git</div>
-                        <div class="pill">SVN</div>
-                        <div class="pill">Bash</div>
-                        <div class="pill">Python</div>
                         <div class="pill">Visual Studio code</div>
                         <div class="pill">Clion</div>
-                        <div class="pill">Atlassian Jira</div>
-                        <div class="pill">Atlassian Confluence</div>
-                        <div class="pill">Linux kernel</div>
-                    </div>
-                </div>
-
-                <div class="card box">
-                    <h3>Дополнительно</h3>
-                    <div class="pillset" aria-label="Дополнительно">
-                        <div class="pill">Astra Linux SE 1.6</div>
-                        <div class="pill">Разработка ГИС</div>
-                        <div class="pill">Управление проектами</div>
-                        <div class="pill">Управление командой</div>
-                        <div class="pill">Rust</div>
+                        <div class="pill">Visual Studio</div>
+                        <div class="pill">QtCreator</div>
                     </div>
                 </div>
             </div>
@@ -399,7 +200,7 @@
                     </div>
                     <p>
                         Разработка и тестирование проприетарного протокола пакетной передачи данных для комплекса
-                        технических средств систем специальной связи (Astra Linux SE 1.6).
+                        технических средств систем специальной связи (Astra Linux SE).
                     </p>
                 </div>
             </div>
@@ -412,12 +213,11 @@
             </div>
             <ul class="list">
                 <li>СПбГЭТУ «ЛЭТИ» им. В. И. Ульянова (Ленина), Санкт‑Петербург.</li>
-                <li>Специальность: 10.05.01 — Компьютерная безопасность.</li>
-                <li>Год окончания: 2025 (высшее).</li>
+                <li>Специальность: 10.05.01 Компьютерная безопасность.</li>
+                <li>Год окончания: 2025</li>
             </ul>
         </section>
     </main>
-
     <footer class="wrap" itemscope itemtype="https://schema.org/Person">
         <div class="foot">
             <div class="mono">© <span id="y"></span> <span itemprop="name">Смирнов Ярослав, Санкт‑Петербург</span></div>
@@ -427,12 +227,9 @@
         </div>
     </footer>
     <script>
-        const email = "d3156@mail.ru";
-        document.getElementById("y").textContent = new Date().getFullYear();
-    </script>
-    <script>
-        function monthDiff(start, end) { return Math.max(0,(end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1); }
+        function monthDiff(start, end) { return Math.max(0, (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1); }
         document.getElementById('tenure').textContent = `Июль 2025 — сейчас (${monthDiff(new Date(2025, 6, 1), new Date())} месяцев)`;
+        document.getElementById("y").textContent = new Date().getFullYear();
     </script>
     <script defer src="./assets/js/rotating-title.js"></script>
 </body>
