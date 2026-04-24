@@ -64,22 +64,43 @@ h1 a img:active {
     transform: translate3d(2px, 2px, 2px);
 }
 
-.btn {
-    text-wrap: initial;
+.articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
-.btn:hover {
-    transform: translateY(-2px);
-    border-color: rgba(124, 92, 255, .95);
+.article-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(36, 52, 95, .85);
+    background: rgba(7, 11, 22, .25);
+    color: var(--text);
+    font-size: 13.5px;
+    line-height: 1.4;
+    transition: .2s ease;
 }
 
-.btn:active {
-    transform: translate3d(2px, 2px, 2px);
+.article-link:hover {
+    border-color: rgba(124, 92, 255, .8);
+    background: rgba(124, 92, 255, .08);
+    transform: translateX(3px);
 }
 
-.btn.primary {
-    background: linear-gradient(135deg, rgba(124, 92, 255, .95), rgba(34, 211, 238, .55));
-    border-color: rgba(255, 255, 255, .14);
+.article-link-arrow {
+    color: var(--muted);
+    flex-shrink: 0;
+    font-size: 15px;
+    transition: color .2s ease, transform .2s ease;
+}
+
+.article-link:hover .article-link-arrow {
+    color: var(--accent);
+    transform: translateX(3px);
 }
 
 .hero-side {

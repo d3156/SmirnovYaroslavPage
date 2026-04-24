@@ -1,4 +1,5 @@
 [
+  { "title": "Анализ безопасности SIP-телефонии: уязвимости и моделирование угроз", "url": "./SIPsecurity.html", "date": "2026-02-03", "tags": ["SIP", "VoIP", "DoS/DDoS", "OCTAVE"]},
   { "title": "Аудит ЭЦП: типовые ошибки реализации", "url": "./Digitalsignature.html", "tags": ["ЭЦП","HMAC","Webhook"]},
   { "title": "Модульная расширяемая архитектура", "url": "./ModuleExtender.html", "tags": [ "Plugins", "Модели", "Архитектура"]},
   { "title": "Плагинная архитектура: загрузка и интерфейсы", "url": "./PlaginCore.html", "tags": ["Plugins","C++","ABI"]},

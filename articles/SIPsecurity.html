@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Анализ безопасности SIP-телефонии: уязвимости и моделирование угроз</title>
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+    <meta name="description"
+        content="Анализ безопасности протокола SIP: оценка уязвимостей реальной Asterisk-системы, практика Fail2Ban и двухсценарное моделирование угроз по методологии OCTAVE." />
+    <meta name="theme-color" content="#0b1220" />
+    <link rel="stylesheet" href="./../assets/css/base.css">
+    <link rel="stylesheet" href="./../assets/css/articles.css">
+    <link rel="stylesheet" href="./../assets/css/logo.css">
+</head>
+<script defer src="../assets/js/articles.js"></script>
+<script defer src="../assets/js/rotating-title.js"></script>
+
+<body>
+    <div class="nav">
+        <div class="wrap">
+            <div class="row">
+                <div class="brand">
+                    <span id="logo-slot"></span>
+                    <span class="console-logo" aria-label="console logo">
+                        <span class="chev">&gt;</span><span class="cursor">_</span>
+                    </span>
+                    <div id="rotating" class="wipe"></div>
+                </div>
+                <nav class="menu article-nav" aria-label="Навигация статьи">
+                    <a class="chip nav-home icon-only" href="../index.html" aria-label="На главную">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20 12H4m0 0 6-6m-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="nav-home-text">На главную</span>
+                    </a>
+                    <a class="chip" href="#attacks">Атаки на SIP</a>
+                    <a class="chip" href="#vuln">Уязвимости</a>
+                    <a class="chip" href="#threats">Модель угроз</a>
+                    <a class="chip" href="#conclusion">Выводы</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <header class="wrap">
+        <div class="card hero">
+            <div class="kicker"><span class="dot" aria-hidden="true"></span><span class="mono">Конференционная статья •
+                    ElCon-CP 2026 • SIP / VoIP</span></div>
+            <h1>Анализ безопасности SIP-телефонии: уязвимости и моделирование угроз</h1>
+            <p class="subtitle">
+                Комплексный анализ защищённости передачи данных по протоколу SIP: оценка уязвимостей реальной системы
+                на базе Asterisk и построение двухсценарной модели угроз по методологии OCTAVE.
+                Авторы: Смирнов Я. В., Никифорова А. В. —
+                <span class="mono"><a href="https://doi.org/10.1109/elcon-cp69823.2026.11452202" target="_blank"
+                        rel="noreferrer">IEEE, ElCon-CP 2026</a></span>
+            </p>
+
+            <div class="pillset" style="margin-top:14px;">
+                <span class="pill">SIP / VoIP</span>
+                <span class="pill">DoS / DDoS</span>
+                <span class="pill">Asterisk</span>
+                <span class="pill">Fail2Ban</span>
+                <span class="pill">OCTAVE</span>
+                <span class="pill">Zero Trust</span>
+            </div>
+        </div>
+
+        <section class="card box" id="tldr">
+            <div class="section-title">
+                <h2>Ключевые результаты</h2>
+            </div>
+            <div class="callout">
+                <ul class="list" style="margin:0;">
+                    <li>За первые <b>сутки</b> работы публичного SIP-сервера его атаковали <b>73 уникальных
+                            IP-адреса</b> брутфорсом REGISTER — Fail2Ban зафиксировал 1 411 попыток аутентификации.</li>
+                    <li>Помимо брутфорса, <b>веб-краулер</b> непрерывно сканировал порт 5060 через HTTP GET, пытаясь
+                        обнаружить веб-страницу или уязвимость.</li>
+                    <li><b>VPN-изоляция</b> снижает внешнюю поверхность атаки, но переносит вектор угроз на инсайдеров
+                        и компрометацию VPN-шлюза.</li>
+                    <li>Для критичной VoIP-инфраструктуры реактивных мер (Fail2Ban, UFW) недостаточно — необходима
+                        архитектура <b>Zero Trust</b>.</li>
+                </ul>
+            </div>
+        </section>
+    </header>
+
+    <main class="wrap">
+        <section class="card box" id="attacks">
+            <div class="section-title">
+                <h2>Атаки на SIP-инфраструктуру</h2>
+            </div>
+
+            <p class="note" style="margin:0 0 12px;">
+                SIP-сообщения по умолчанию передаются в открытом тексте. Это позволяет атакующему перехватить
+                IP-адреса, пароли аутентификации, номера телефонов и данные о местоположении абонентов. Для шифрования
+                применяется TLS, однако далеко не все softphone-решения предлагают его в базовой конфигурации.
+            </p>
+
+            <div class="callout" style="margin-bottom:12px;">
+                По данным за III квартал 2025 г., количество DDoS-атак на телекоммуникационный сектор России выросло на
+                <b>36%</b> по сравнению с предыдущим кварталом. На каждого телеком-оператора в 2025 г. приходилось в
+                среднем <b>~340 атак</b>.
+            </div>
+
+            <h3 style="margin:0 0 8px; font-size:15px;">DoS-атаки на уровне приложений</h3>
+            <dl class="defs">
+                <dt>INVITE Flood</dt>
+                <dd>Массовая отправка INVITE-запросов на softphone или сервер. Перегружает очередь обработки и
+                    препятствует установлению легитимных вызовов.</dd>
+
+                <dt>REGISTER Flood</dt>
+                <dd>Поток REGISTER-запросов с произвольными именами пользователей. Истощает ресурсы SIP-сервера,
+                    обрабатывающего попытки аутентификации.</dd>
+
+                <dt>CANCEL Flood</dt>
+                <dd>Ложные CANCEL-сообщения на активные вызовы. Вызывает преждевременное завершение звонков.</dd>
+
+                <dt>SIP Amplification</dt>
+                <dd>Атакующий подменяет исходный адрес на адрес жертвы и рассылает короткие INVITE-запросы множеству
+                    SIP-серверов. Серверы отвечают объёмными пакетами непосредственно на адрес жертвы.</dd>
+            </dl>
+
+            <h3 style="margin:16px 0 8px; font-size:15px;">DDoS-атаки на сетевом и транспортном уровнях</h3>
+            <dl class="defs">
+                <dt>IP-фрагментация</dt>
+                <dd>Передача большого количества фрагментов IP-пакетов перегружает вычислительные ресурсы всех
+                    узлов-обработчиков на пути к цели, замедляя обработку легитимного трафика.</dd>
+
+                <dt>DNS Amplification</dt>
+                <dd>Поддельный DNS-запрос к уязвимому резолверу порождает ответ значительно большего размера,
+                    направляемый на адрес жертвы. Канал жертвы переполняется ответными пакетами.</dd>
+
+                <dt>TCP / UDP флуд</dt>
+                <dd>Открытие множества TCP-соединений или отправка UDP-пакетов на случайные порты SIP-сервера истощает
+                    дескрипторы и буферы сокетов.</dd>
+            </dl>
+        </section>
+
+        <section class="card box" id="vuln">
+            <div class="section-title">
+                <h2>Анализ уязвимостей: тестовая среда</h2>
+            </div>
+
+            <p class="note" style="margin:0 0 12px;">
+                Для практического исследования развёрнута тестовая VoIP-система: сервер <b>Asterisk</b> (open source
+                PBX, Digium, 1999) и softphone-клиенты <b>Linphone</b> (Linux/Windows/macOS/iOS/Android). Конфигурация
+                — через файл <span class="mono">asterisk-custom.conf</span>.
+            </p>
+
+            <div class="callout">
+                <b>Наблюдение 1 — брутфорс:</b> в течение первых суток работы публичного сервера 73 уникальных
+                IP-адреса отправили SIP REGISTER-запросы с попытками подбора учётных данных. Fail2Ban
+                зафиксировал <b>1 411 неудачных попыток</b> аутентификации и заблокировал все 73 адреса.
+            </div>
+
+            <div class="callout" style="margin-top:10px;">
+                <b>Наблюдение 2 — сканирование:</b> веб-краулер (IP 3.137.73.221, компания Cypex) непрерывно опрашивал
+                порт <span class="mono">5060</span> стандартными HTTP GET-запросами — сервер обрабатывал их как
+                некорректные SIP-сообщения. Возможные цели: поиск уязвимостей, сбор разведывательной информации.
+            </div>
+
+            <h3 style="margin:16px 0 8px; font-size:15px;">Конфигурация Fail2Ban</h3>
+            <p class="note" style="margin:0 0 8px;">
+                Fail2Ban сканирует лог Asterisk в реальном времени и блокирует IP при совпадении с
+                <span class="mono">failregex</span>. Правило фиксирует любую строку вида
+                <span class="mono">failed for '&lt;HOST&gt;' — Failed to authenticate</span>
+                и немедленно добавляет адрес в список блокировки UFW.
+            </p>
+            <div class="callout">
+                <b>Ограничение:</b> Fail2Ban — реактивная мера. Она не защищает уже разрешённый SIP/RTP-трафик и
+                бессильна против распределённых атак с IP-спуфингом или из ботнета.
+            </div>
+        </section>
+
+        <section class="card box" id="threats">
+            <div class="section-title">
+                <h2>Моделирование угроз (OCTAVE)</h2>
+            </div>
+
+            <p class="note" style="margin:0 0 14px;">
+                Использована методология <b>OCTAVE</b> (Operationally Critical Threat, Asset and Vulnerability
+                Evaluation). Рассмотрены два типичных сценария развёртывания VoIP-сервера.
+            </p>
+
+            <h3 style="margin:0 0 10px; font-size:15px;">Сценарий 1 — публичный Asterisk-сервер</h3>
+
+            <dl class="defs">
+                <dt>Активы</dt>
+                <dd>SIP/RTP-сервисы; данные пользователей SIP-клиентов; содержимое голосовых вызовов.</dd>
+
+                <dt>Угрозы</dt>
+                <dd>
+                    <ul class="list" style="margin:4px 0 0;">
+                        <li><b>Перехват трафика:</b> в классической конфигурации без TLS атакующий пассивно
+                            прослушивает вызовы и перехватывает учётные данные.</li>
+                        <li><b>Сканирование:</b> автоматизированный сбор информации об открытых портах и сервисах.</li>
+                        <li><b>Брутфорс:</b> массовый подбор паролей — 73 IP за первые сутки.</li>
+                        <li><b>DoS:</b> высокая нагрузка от обработки поддельных запросов нарушает работу легитимных
+                            клиентов.</li>
+                    </ul>
+                </dd>
+
+                <dt>Уязвимости</dt>
+                <dd>
+                    <ul class="list" style="margin:4px 0 0;">
+                        <li>Отсутствие шифрования SIP/RTP — ключевая техническая уязвимость.</li>
+                        <li>Публичная доступность SIP-сервисов без ограничений по IP.</li>
+                        <li>Зависимость от реактивной IP-фильтрации (Fail2Ban, UFW).</li>
+                    </ul>
+                </dd>
+
+                <dt>Меры защиты</dt>
+                <dd>UFW (минимизация поверхности атаки) + Fail2Ban (блокировка брутфорса). Остаточный риск: трафик с
+                    уже разрешённых адресов не проверяется; при DDoS возможно исчерпание ресурсов сервера.</dd>
+            </dl>
+
+            <h3 style="margin:20px 0 10px; font-size:15px;">Сценарий 2 — Asterisk за VPN</h3>
+
+            <dl class="defs">
+                <dt>Активы</dt>
+                <dd>Сервис Asterisk (изолирован от интернета); VPN-шлюз и его конфигурация.</dd>
+
+                <dt>Угрозы</dt>
+                <dd>
+                    <ul class="list" style="margin:4px 0 0;">
+                        <li><b>Компрометация VPN:</b> брутфорс или утечка учётных данных открывает доступ к
+                            внутренней сети.</li>
+                        <li><b>Инсайдерские атаки:</b> авторизованные пользователи VPN могут совершать злонамеренные
+                            действия.</li>
+                        <li><b>Ошибки конфигурации:</b> некорректные правила маршрутизации могут «пробить» трафик
+                            Asterisk в публичную сеть.</li>
+                    </ul>
+                </dd>
+
+                <dt>Уязвимости</dt>
+                <dd>
+                    <ul class="list" style="margin:4px 0 0;">
+                        <li>SIP/RTP-трафик между клиентами и Asterisk внутри VPN остаётся незашифрованным.</li>
+                        <li>Слабые учётные данные VPN могут привести к утечке трафика в публичную сеть.</li>
+                        <li>Высокая сложность конфигурации сетевых правил и маршрутизации.</li>
+                    </ul>
+                </dd>
+
+                <dt>Меры защиты</dt>
+                <dd>Asterisk недоступен из интернета; подключение только через VPN-клиент. Остаточный риск:
+                    внутренние угрозы становятся доминирующими; голосовой трафик внутри VPN не защищён.</dd>
+            </dl>
+
+            <div class="callout" style="margin-top:14px;">
+                <b>Сравнение сценариев:</b> VPN-изоляция эффективно нейтрализует внешние угрозы (массовое
+                сканирование, брутфорс из интернета), однако не защищает от атак изнутри периметра. Чем жёстче
+                внешние ограничения — тем актуальнее становятся инсайдерские риски.
+            </div>
+        </section>
+
+        <section class="card box" id="conclusion">
+            <div class="section-title">
+                <h2>Выводы</h2>
+            </div>
+
+            <ul class="list">
+                <li>VoIP-сегментация через VPN снижает риски от внешних угроз, но не обеспечивает защиту от
+                    инсайдеров и гибридных атак.</li>
+                <li>Авторизованный или неавторизованный нарушитель способен атаковать любой атрибут безопасности:
+                    конфиденциальность (перехват сигнализации и медиа), целостность (подмена данных пользователей),
+                    доступность (DoS-атаки).</li>
+                <li>Для систем, не являющихся критичной инфраструктурой, связки UFW + Fail2Ban + VPN может быть
+                    достаточно.</li>
+                <li>В остальных случаях необходима полная переработка архитектуры VoIP-телефонии с применением
+                    парадигмы <b>Zero Trust</b>: непрерывная верификация, минимальные привилегии, шифрование всего
+                    трафика вне зависимости от сегмента сети.</li>
+            </ul>
+        </section>
+
+        <section class="card box" id="refs">
+            <div class="section-title">
+                <h2>Ссылки</h2>
+            </div>
+            <ul class="list">
+                <li>
+                    <b>Оригинальная статья:</b> Smirnov Y. V., Nikiforova A. V. «Security Analysis of the Session
+                    Initiation Protocol (SIP): Vulnerability Assessment and Threat Modeling» —
+                    2026 ElCon Conference of Young Researchers in Computing &amp; Processing, and Information Security
+                    (ElCon-CP), 2026-02-03.<br>
+                    DOI:&nbsp;<span class="mono"><a href="https://doi.org/10.1109/elcon-cp69823.2026.11452202"
+                            target="_blank"
+                            rel="noreferrer">10.1109/elcon-cp69823.2026.11452202</a></span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="card box" id="more">
+            <div class="section-title">
+                <h2>Другие статьи</h2>
+            </div>
+            <div id="more-articles" class="more-articles"></div>
+        </section>
+    </main>
+
+    <footer class="wrap">
+        <div class="foot">
+            <div class="mono">© <span id="y"></span> Смирнов Ярослав</div>
+            <div class="mono"><a class="chip" href="#top">Наверх</a></div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
