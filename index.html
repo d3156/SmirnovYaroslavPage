@@ -132,63 +132,41 @@
             <div class="section-title">
                 <h2>Обо мне</h2>
             </div>
-            <p class="about">
-                Пишу системное ПО под Linux на C++ (Qt, Boost) и Rust: сетевые сервисы, обработку трафика, настольные
-                приложения. Основная область — VoIP-телефония и информационная безопасность: статья о безопасности SIP
-                вышла в трудах конференции IEEE ElCon-CP 2026. Руководил
-                командой из трёх разработчиков, сопровождал новых сотрудников на испытательном сроке. Рутину
-                автоматизирую собственными инструментами — пример в <a href="./articles/Tooling.html">статье про Tooling</a>.
-            </p>
+            <ul class="list about" aria-label="Информация обо мне">
+                <li><b>C++ и Rust</b> — системное ПО под Linux: сетевые сервисы, обработка трафика, настольные
+                    приложения.</li>
+                <li><b>VoIP и ИБ</b> — статья о безопасности SIP в трудах конференции IEEE ElCon-CP 2026.</li>
+                <li><b>Команда</b> — руководил группой из трёх разработчиков, сопровождал новых сотрудников на
+                    испытательном сроке.</li>
+                <li><b>Автоматизация</b> — рутину закрываю собственными инструментами, пример — в
+                    <a href="./articles/Tooling.html">статье про Tooling</a>.</li>
+            </ul>
         </section>
 
-        <section id="projects">
+        <section id="projects" class="card box">
             <div class="section-title">
                 <h2>Проекты</h2>
                 <p>Открытый код на GitHub</p>
             </div>
-
-            <div class="grid" role="list" aria-label="Проекты">
-                <div class="card box project" role="listitem">
-                    <h3><a href="https://github.com/d3156/PluginCore" target="_blank" rel="noreferrer">PluginCore</a></h3>
-                    <p>
-                        Библиотека для приложений, целиком собранных из плагинов: ядро загружает модули, управляет их
-                        жизненным циклом и связывает через модели. Релиз 1.1.1, готовые плагины: метрики Prometheus,
-                        оповещения в Telegram, проверка доступности узлов. <a href="./articles/PlaginCore.html">Статья</a>
-                    </p>
-                    <div class="pillset">
-                        <div class="pill">C++</div>
-                        <div class="pill">CMake</div>
-                        <div class="pill">Плагины</div>
-                        <div class="pill">Prometheus</div>
-                    </div>
-                </div>
-                <div class="card box project" role="listitem">
-                    <h3><a href="https://github.com/d3156/HopTerm" target="_blank" rel="noreferrer">HopTerm</a></h3>
-                    <p>
-                        Графический менеджер SSH-подключений и терминал для Linux: цепочки переходов через промежуточные
-                        хосты, вкладки сессий, проброс портов и SOCKS, VNC, передача файлов по SFTP, проверка ключей
-                        хостов. Сборки в .deb.
-                    </p>
-                    <div class="pillset">
-                        <div class="pill">Rust</div>
-                        <div class="pill">SSH</div>
-                        <div class="pill">SFTP</div>
-                        <div class="pill">xterm.js</div>
-                    </div>
-                </div>
-                <div class="card box project" role="listitem">
-                    <h3><a href="https://github.com/d3156/Integerfinder" target="_blank" rel="noreferrer">Integerfinder</a></h3>
-                    <p>
-                        Поиск чисел разной разрядности и порядка байт в двоичном файле с отбором по значениям из
-                        текстового лога. Написан для восстановления утраченного бинарного протокола.
-                        <a href="./articles/Tooling.html">Статья</a>
-                    </p>
-                    <div class="pillset">
-                        <div class="pill">C++</div>
-                        <div class="pill">CLI</div>
-                        <div class="pill">Reverse engineering</div>
-                    </div>
-                </div>
+            <div class="articles-list" aria-label="Проекты">
+                <a class="article-link" href="https://github.com/d3156/PluginCore" target="_blank" rel="noreferrer">
+                    <span><b>PluginCore</b><span class="mono project-lang">C++</span><br>
+                        <span class="project-desc">Библиотека для приложений из плагинов: загрузка модулей, жизненный цикл,
+                            связь через модели. Релиз 1.1.1.</span></span>
+                    <span class="article-link-arrow">&#8594;</span>
+                </a>
+                <a class="article-link" href="https://github.com/d3156/HopTerm" target="_blank" rel="noreferrer">
+                    <span><b>HopTerm</b><span class="mono project-lang">Rust</span><br>
+                        <span class="project-desc">Менеджер SSH-подключений и терминал для Linux: цепочки хостов, проброс
+                            портов, SOCKS, VNC, SFTP.</span></span>
+                    <span class="article-link-arrow">&#8594;</span>
+                </a>
+                <a class="article-link" href="https://github.com/d3156/Integerfinder" target="_blank" rel="noreferrer">
+                    <span><b>Integerfinder</b><span class="mono project-lang">C++</span><br>
+                        <span class="project-desc">Поиск чисел разной разрядности и порядка байт в двоичном файле для
+                            восстановления бинарных протоколов.</span></span>
+                    <span class="article-link-arrow">&#8594;</span>
+                </a>
             </div>
         </section>
 
@@ -208,6 +186,14 @@
                         <div class="pill">Qt</div>
                         <div class="pill">Rust</div>
                         <div class="pill">ООП</div>
+                    </div>
+                </div>
+                <div class="card box" role="listitem">
+                    <h3>Операционные системы</h3>
+                    <div class="pillset" aria-label="Опыт работы с ОС">
+                        <div class="pill">Ubuntu 22/24</div>
+                        <div class="pill">Astra Linux SE</div>
+                        <div class="pill">Windows 7/10</div>
                     </div>
                 </div>
                 <div class="card box" role="listitem">
@@ -235,14 +221,6 @@
                         <div class="pill">perf</div>
                         <div class="pill">Wireshark</div>
                         <div class="pill">Docker</div>
-                    </div>
-                </div>
-                <div class="card box" role="listitem">
-                    <h3>Операционные системы</h3>
-                    <div class="pillset" aria-label="Опыт работы с ОС">
-                        <div class="pill">Ubuntu 22/24</div>
-                        <div class="pill">Astra Linux SE</div>
-                        <div class="pill">Windows 7/10</div>
                     </div>
                 </div>
                 <div class="card box" role="listitem">
@@ -279,11 +257,16 @@
                         <b>НЕОС — Инженер‑программист</b>
                         <time id="tenure" datetime="2025-07"></time>
                     </div>
-                    <p>
-                        Разработка высоконагруженного ПО на C++ для сетей связи: SIP/RTP, протоколы мобильных сетей
-                        (SIGTRAN, GTP), захват и обработка пакетов (DPDK, AF_PACKET TPACKET_V3), отладка санитайзерами,
-                        профилирование perf.
-                    </p>
+                    <p>Разработка высоконагруженного ПО на C++ для сетей связи.</p>
+                    <div class="pillset">
+                        <div class="pill">SIP/RTP</div>
+                        <div class="pill">SIGTRAN</div>
+                        <div class="pill">GTP</div>
+                        <div class="pill">DPDK</div>
+                        <div class="pill">AF_PACKET (TPACKET_V3)</div>
+                        <div class="pill">ASan/TSan</div>
+                        <div class="pill">perf</div>
+                    </div>
                 </div>
 
                 <div class="job" role="listitem">
@@ -310,15 +293,25 @@
         <section id="edu" class="card box" aria-label="Образование">
             <div class="section-title">
                 <h2>Образование</h2>
-                <p>Вуз и специализация</p>
+                <p>СПбГЭТУ «ЛЭТИ»</p>
             </div>
-            <ul class="list" role="list">
-                <li>СПбГЭТУ «ЛЭТИ» им. В. И. Ульянова (Ленина), Санкт‑Петербург.</li>
-                <li>Специальность: 10.05.01 Компьютерная безопасность.</li>
-                <li>Год окончания: <time datetime="2025">2025</time></li>
-                <li>Аспирантура с <time datetime="2025">2025</time> года: 2.3.6 «Методы и системы защиты информации,
-                    информационная безопасность», направление — безопасность VoIP-телефонии.</li>
-            </ul>
+            <div class="timeline">
+                <div class="job">
+                    <div class="jobhead">
+                        <b>Аспирантура</b>
+                        <time datetime="2025">С 2025</time>
+                    </div>
+                    <p>2.3.6 «Методы и системы защиты информации, информационная безопасность», направление —
+                        безопасность VoIP-телефонии.</p>
+                </div>
+                <div class="job">
+                    <div class="jobhead">
+                        <b>Специалитет</b>
+                        <time datetime="2025">Выпуск 2025</time>
+                    </div>
+                    <p>10.05.01 «Компьютерная безопасность».</p>
+                </div>
+            </div>
         </section>
     </main>
     <footer class="wrap">
