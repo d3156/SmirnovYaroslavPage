@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Аудит ЭЦП в платёжном API: типовые ошибки и модель угроз</title>
+    <title>Аудит подписи запросов в платёжном API: типовые ошибки и модель угроз</title>
     <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
     <meta name="description"
-        content="Техническая статья: аудит цифровой подписи (ЭЦП) в платёжных API на примере схем подписания запросов FreeKassa (SCI и API v1). Ошибки: MD5, слабый ключ, подпись в URL и риск подделки уведомлений." />
+        content="Техническая статья: аудит подписи запросов (MAC) в платёжных API на примере схем подписания запросов FreeKassa (SCI и API v1). Ошибки: MD5, слабый ключ, подпись в URL и риск подделки уведомлений." />
     <meta name="theme-color" content="#0b1220" />
     <link rel="stylesheet" href="./../assets/css/base.css">
     <link rel="stylesheet" href="./../assets/css/articles.css">
@@ -52,7 +52,7 @@
         <div class="card hero">
             <div class="kicker"><span class="dot" aria-hidden="true"></span><span class="mono">Техническая статья •
                     Secure code review</span></div>
-            <h1>Аудит ЭЦП в платёжном API: типовые ошибки реализации</h1>
+            <h1>Аудит подписи запросов в платёжном API: типовые ошибки реализации</h1>
             <p class="subtitle">
                 Разбор схем подписания запросов в платёжном API на примере FreeKassa: SCI (подпись на MD5) и API v1
                 (HMAC-SHA256). Источник требований/примеры: официальная документация сервиса.
@@ -61,7 +61,7 @@
             </p>
 
             <div class="pillset" style="margin-top:14px;">
-                <span class="pill">ЭЦП / подписи запросов</span>
+                <span class="pill">Подпись запросов (MAC)</span>
                 <span class="pill">MD5</span>
                 <span class="pill">HMAC-SHA256</span>
                 <span class="pill">Webhook / уведомления</span>
