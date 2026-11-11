@@ -1,7 +1,7 @@
 [
   { "title": "Анализ безопасности SIP-телефонии: уязвимости и моделирование угроз", "url": "./SIPsecurity.html", "date": "2026-02-03", "tags": ["SIP", "VoIP", "DoS/DDoS", "OCTAVE"]},
-  { "title": "Аудит подписи запросов: типовые ошибки реализации", "url": "./Digitalsignature.html", "tags": ["MAC","HMAC","Webhook"]},
-  { "title": "Модульная расширяемая архитектура", "url": "./ModuleExtender.html", "tags": [ "Plugins", "Модели", "Архитектура"]},
-  { "title": "Плагинная архитектура: загрузка и интерфейсы", "url": "./PlaginCore.html", "tags": ["Plugins","C++","ABI"]},
-  { "title": "Tooling: ускорение сборки и диагностики", "url": "./Tooling.html", "tags": ["Tooling","CMake"]}
+  { "title": "Аудит подписи запросов: типовые ошибки реализации", "url": "./Digitalsignature.html", "date": "2026-01-15", "tags": ["MAC","HMAC","Webhook"]},
+  { "title": "Модульная расширяемая архитектура", "url": "./ModuleExtender.html", "date": "2026-01-17", "tags": [ "Plugins", "Модели", "Архитектура"]},
+  { "title": "Плагинная архитектура: загрузка и интерфейсы", "url": "./PlaginCore.html", "date": "2026-01-15", "tags": ["Plugins","C++","ABI"]},
+  { "title": "Tooling: ускорение сборки и диагностики", "url": "./Tooling.html", "date": "2026-01-15", "tags": ["Tooling","CMake"]}
 ]
