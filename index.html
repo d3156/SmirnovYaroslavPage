@@ -46,7 +46,7 @@
                 <h1 class="hero-title">
                     <span class="hero-name">Смирнов Ярослав</span>
 
-                    <span class="hero-contacts" aria-label="Социальные сети и контакты">
+                    <span class="hero-contacts" id="contacts" aria-label="Социальные сети и контакты">
                         <a title="GitHub" href="https://github.com/d3156" target="_blank" rel="noreferrer"><img src="./assets/img/Gihub.svg" alt="GitHub" loading="lazy"></a>
                         <a title="ORCID" href="https://orcid.org/0009-0005-5375-4476" target="_blank" rel="noreferrer"><img src="./assets/img/ORCID.svg" alt="ORCID" loading="lazy"></a>
                         <a title="Telegram" href="https://t.me/YS3156" target="_blank" rel="noreferrer"><img src="./assets/img/Telegram.svg" alt="Telegram" loading="lazy"></a>
@@ -119,8 +119,8 @@
             <ul class="list" aria-label="Информация обо мне">
                 Быстро погружаюсь в новые прикладные области. Автоматизирую свою работу и всегда стремлюсь помочь
                 коллегам.
-                Имею опыт управления командой разработчиков из 3 человек. Умею разработывать как Backend, так и
-                GUI-ориентированных приложений.
+                Имею опыт управления командой разработчиков из 3 человек. Умею разрабатывать как Backend, так и
+                GUI-ориентированные приложения.
             </ul>
         </section>
 
@@ -184,8 +184,8 @@
                 <div class="card box" role="listitem">
                     <h3>IDE</h3>
                     <div class="pillset" aria-label="Инструменты">
-                        <div class="pill">Visual Studio code</div>
-                        <div class="pill">Clion</div>
+                        <div class="pill">Visual Studio Code</div>
+                        <div class="pill">CLion</div>
                         <div class="pill">Visual Studio</div>
                         <div class="pill">QtCreator</div>
                     </div>
@@ -202,7 +202,7 @@
                 <div class="job" role="listitem">
                     <div class="jobhead">
                         <b>НЕОС — Инженер‑программист</b>
-                        <span id="tenure"></span>
+                        <time id="tenure" datetime="2025-07"></time>
                     </div>
                     <p>Разработка ПО в области VoIP-телефонии.</p>
                 </div>
@@ -210,7 +210,7 @@
                 <div class="job" role="listitem">
                     <div class="jobhead">
                         <b>NDA — Инженер‑программист</b>
-                        <time datetime="2022-08-2025-07">Август 2022 — Июль 2025 (3 года)</time>
+                        <time datetime="2022-08">Август 2022 — Июль 2025 (3 года)</time>
                     </div>
                     <p>Разработка СПО на C++/Qt.</p>
                 </div>
@@ -218,7 +218,7 @@
                 <div class="job" role="listitem">
                     <div class="jobhead">
                         <b>ЭВРИКА (Санкт‑Петербург) — Инженер‑программист</b>
-                        <time datetime="2021-06-2023-09">Июнь 2021 — сентябрь 2023 (2 года 4 месяца)</time>
+                        <time datetime="2021-06">Июнь 2021 — Сентябрь 2023 (2 года 4 месяца)</time>
                     </div>
                     <p>
                         Разработка и тестирование проприетарного протокола пакетной передачи данных для комплекса
@@ -250,7 +250,9 @@
     </footer>
     <script>
         function monthDiff(start, end) { return Math.max(0, (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1); }
-        document.getElementById('tenure').textContent = `Июль 2025 — сейчас (${monthDiff(new Date(2025, 6, 1), new Date())} месяцев)`;
+        function plural(n, one, few, many) { const m10 = n % 10, m100 = n % 100; return m10 === 1 && m100 !== 11 ? one : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? few : many; }
+        function tenureText(months) { const y = Math.floor(months / 12), m = months % 12; return [y ? `${y} ${plural(y, 'год', 'года', 'лет')}` : '', m ? `${m} ${plural(m, 'месяц', 'месяца', 'месяцев')}` : ''].filter(Boolean).join(' '); }
+        document.getElementById('tenure').textContent = `Июль 2025 — сейчас (${tenureText(monthDiff(new Date(2025, 6, 1), new Date()))})`;
         document.getElementById("y").textContent = new Date().getFullYear();
     </script>
     <script defer src="./assets/js/rotating-title.js"></script>

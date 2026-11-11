@@ -22,6 +22,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 72px;
 }
 
 html,
@@ -316,6 +317,10 @@ footer {
 }
 
 @media (max-width: 860px) {
+  html {
+    scroll-padding-top: 120px;
+  }
+
   .nav .row {
     gap: 10px;
   }

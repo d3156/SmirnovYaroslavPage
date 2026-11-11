@@ -58,7 +58,7 @@
             <h1>Модульная расширяемая архитектура</h1>
 
             <p class="subtitle">
-                Практика проектирования приложений из плагинов и моделей так, чтобы его можно было расширять
+                Практика проектирования приложений из плагинов и моделей так, чтобы их можно было расширять
                 динамически, избегая превращения кода в монолит. Такой подход помогает переиспользовать код, а найденные
                 ошибки и уязвимости исправлять сразу во всех приложениях, использующих модуль.
             </p>
@@ -205,26 +205,26 @@ PayModel &lt;--&gt; Pay...Plugin</code></pre>
             </div>
 
             <p style="margin:0;">
-                Модель также можеть быть интерфейсом единственного возможного плагина‑провайдера. Если
+                Модель также может быть интерфейсом единственного возможного плагина-провайдера. Если
                 модуль не загрузился, модель сообщает об этом потребителям, а они сами решают, что делать дальше.
             </p>
 
             <h3 style="margin:14px 0 6px;">Пример: VirtualMachineManager</h3>
             <ul class="list">
-                <li><span class="mono">VitualMachineManagerModel</span> описывает операции управления ВМ, общие для всех
+                <li><span class="mono">VirtualMachineManagerModel</span> описывает операции управления ВМ, общие для всех
                     потребителей.</li>
-                <li>Реализация берётся из одного плагина: <span class="mono">VitualMachineManagerPlugin</span> или, при
-                    необходимости, из удалённой версии <span class="mono">ExternalVitualMachineManagerPlugin</span>.
+                <li>Реализация берётся из одного плагина: <span class="mono">VirtualMachineManagerPlugin</span> или, при
+                    необходимости, из удалённой версии <span class="mono">ExternalVirtualMachineManagerPlugin</span>.
                 </li>
                 <li>Одновременно может быть загружен только один плагин для реализации функционала
-                    VitualMachineManagerModel.
+                    VirtualMachineManagerModel.
                 </li>
                 <li>Плагины‑потребители (панель, экспортёр метрик, онлайн‑сервис) завязаны только на модель и одинаково
                     работают с локальной или удалённой реализацией.</li>
             </ul>
 
-            <pre><code class="language-plaintext">VitualMachineManagerModel &lt;--&gt; VitualMachineManagerPlugin
-VitualMachineManagerModel &lt;--&gt; ExternalVitualMachineManagerPlugin</code></pre>
+            <pre><code class="language-plaintext">VirtualMachineManagerModel &lt;--&gt; VirtualMachineManagerPlugin
+VirtualMachineManagerModel &lt;--&gt; ExternalVirtualMachineManagerPlugin</code></pre>
 
             <div class="callout" style="margin-top:12px;">
                 Даже при схеме many‑to‑one код не превращается в монолит: реализацию можно заменить
