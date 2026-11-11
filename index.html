@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Смирнов Ярослав C++/Boost/Qt</title>
+    <title>Смирнов Ярослав — C++, Rust, VoIP, ИБ</title>
     <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
     <meta name="author" content="Смирнов Ярослав">
     <meta name="robots" content="index, follow">
     <meta name="description"
-        content="Смирнов Ярослав — программист C++ (C++20), Qt, Boost. Опыт разработки VoIP и системного ПО под Linux/Astra Linux." />
+        content="Смирнов Ярослав — инженер-программист C++ (Qt, Boost) и Rust. VoIP-телефония, информационная безопасность, системное ПО под Linux." />
     <meta name="theme-color" content="#0b1220" />
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/logo.css">
@@ -29,6 +29,7 @@
                 </div>
                 <nav class="menu home-nav" aria-label="Навигация">
                     <a class="chip" href="#about">Обо мне</a>
+                    <a class="chip" href="#projects">Проекты</a>
                     <a class="chip" href="#skills">Навыки</a>
                     <a class="chip" href="#exp">Опыт</a>
                     <a class="chip" href="#edu">Образование</a>
@@ -40,8 +41,7 @@
     <header class="wrap" id="top" itemscope itemtype="https://schema.org/Person">
         <div class="hero">
             <div class="card hero-main">
-                <div class="kicker"><span class="dot" aria-hidden="true"></span><span class="mono">C++/Qt • C++20 •
-                        Boost • Linux</span></div>
+                <div class="kicker"><span class="dot" aria-hidden="true"></span><span class="mono">Инженер-программист: VoIP, ИБ, Linux</span></div>
 
                 <h1 class="hero-title">
                     <span class="hero-name">Смирнов Ярослав</span>
@@ -55,7 +55,7 @@
                 </h1>
 
                 <div class="badges" aria-label="Достижения и компетенции">
-                    <div class="badge">C++ (Qt, Boost, C++20)</div>
+                    <div class="badge">C++20 (Qt, Boost), Rust</div>
                     <div class="badge">Системные/прикладные решения под Linux</div>
                     <div class="badge">Безопасность/криптография: Hash, ЭЦП, PKI, TLS.</div>
                     <div class="badge">Программное обеспечение для VoIP-телефонии</div>
@@ -96,15 +96,13 @@
                     </div>
                 </div>
                 <div class="mini">
-                    <h3>Фокус</h3>
-                    <div class="pillset">
-                        <div class="pill">VoIP</div>
-                        <div class="pill">TCP/IP</div>
-                        <div class="pill">Linux</div>
-                        <div class="pill">Qt Widgets/QtCore</div>
-                        <div class="pill">STL</div>
-                        <div class="pill">ООП</div>
-                        <div class="pill">Рефакторинг</div>
+                    <h3>Публикации</h3>
+                    <div class="articles-list">
+                        <a class="article-link" href="https://doi.org/10.1109/elcon-cp69823.2026.11452202" target="_blank"
+                            rel="noreferrer">
+                            <span>Security Analysis of the Session Initiation Protocol (SIP): Vulnerability Assessment and
+                                Threat Modeling<br><span class="mono">IEEE ElCon-CP 2026</span></span>
+                        </a>
                     </div>
                 </div>
             </aside>
@@ -116,12 +114,64 @@
             <div class="section-title">
                 <h2>Обо мне</h2>
             </div>
-            <ul class="list" aria-label="Информация обо мне">
-                Быстро погружаюсь в новые прикладные области. Автоматизирую свою работу и всегда стремлюсь помочь
-                коллегам.
-                Имею опыт управления командой разработчиков из 3 человек. Умею разрабатывать как Backend, так и
-                GUI-ориентированные приложения.
-            </ul>
+            <p class="about">
+                Пишу системное ПО под Linux на C++ (Qt, Boost) и Rust: сетевые сервисы, обработку трафика, настольные
+                приложения. Основная область — VoIP-телефония и информационная безопасность: статья о безопасности SIP
+                вышла в трудах конференции IEEE ElCon-CP 2026. Руководил
+                командой из трёх разработчиков, сопровождал новых сотрудников на испытательном сроке. Рутину
+                автоматизирую собственными инструментами — пример в <a href="./articles/Tooling.html">статье про Tooling</a>.
+            </p>
+        </section>
+
+        <section id="projects">
+            <div class="section-title">
+                <h2>Проекты</h2>
+                <p>Открытый код на GitHub</p>
+            </div>
+
+            <div class="grid" role="list" aria-label="Проекты">
+                <div class="card box project" role="listitem">
+                    <h3><a href="https://github.com/d3156/PluginCore" target="_blank" rel="noreferrer">PluginCore</a></h3>
+                    <p>
+                        Библиотека для приложений, целиком собранных из плагинов: ядро загружает модули, управляет их
+                        жизненным циклом и связывает через модели. Релиз 1.1.1, готовые плагины: метрики Prometheus,
+                        оповещения в Telegram, проверка доступности узлов. <a href="./articles/PlaginCore.html">Статья</a>
+                    </p>
+                    <div class="pillset">
+                        <div class="pill">C++</div>
+                        <div class="pill">CMake</div>
+                        <div class="pill">Плагины</div>
+                        <div class="pill">Prometheus</div>
+                    </div>
+                </div>
+                <div class="card box project" role="listitem">
+                    <h3><a href="https://github.com/d3156/HopTerm" target="_blank" rel="noreferrer">HopTerm</a></h3>
+                    <p>
+                        Графический менеджер SSH-подключений и терминал для Linux: цепочки переходов через промежуточные
+                        хосты, вкладки сессий, проброс портов и SOCKS, VNC, передача файлов по SFTP, проверка ключей
+                        хостов. Сборки в .deb.
+                    </p>
+                    <div class="pillset">
+                        <div class="pill">Rust</div>
+                        <div class="pill">SSH</div>
+                        <div class="pill">SFTP</div>
+                        <div class="pill">xterm.js</div>
+                    </div>
+                </div>
+                <div class="card box project" role="listitem">
+                    <h3><a href="https://github.com/d3156/Integerfinder" target="_blank" rel="noreferrer">Integerfinder</a></h3>
+                    <p>
+                        Поиск чисел разной разрядности и порядка байт в двоичном файле с отбором по значениям из
+                        текстового лога. Написан для восстановления утраченного бинарного протокола.
+                        <a href="./articles/Tooling.html">Статья</a>
+                    </p>
+                    <div class="pillset">
+                        <div class="pill">C++</div>
+                        <div class="pill">CLI</div>
+                        <div class="pill">Reverse engineering</div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="skills">
@@ -138,8 +188,35 @@
                         <div class="pill">C++20</div>
                         <div class="pill">Boost</div>
                         <div class="pill">Qt</div>
-                        <div class="pill">TCP/IP</div>
+                        <div class="pill">Rust</div>
                         <div class="pill">ООП</div>
+                    </div>
+                </div>
+                <div class="card box" role="listitem">
+                    <h3>Сети и протоколы</h3>
+                    <div class="pillset" aria-label="Сети и протоколы">
+                        <div class="pill">TCP/IP</div>
+                        <div class="pill">SIP/RTP</div>
+                        <div class="pill">TLS</div>
+                        <div class="pill">SIGTRAN</div>
+                        <div class="pill">GTP</div>
+                        <div class="pill">DPDK</div>
+                        <div class="pill">AF_PACKET (TPACKET_V3)</div>
+                        <div class="pill">XDP (базово)</div>
+                    </div>
+                </div>
+                <div class="card box" role="listitem">
+                    <h3>Инструменты</h3>
+                    <div class="pillset" aria-label="Инструменты">
+                        <div class="pill">Git</div>
+                        <div class="pill">SVN</div>
+                        <div class="pill">GitLab CI</div>
+                        <div class="pill">CMake</div>
+                        <div class="pill">GDB</div>
+                        <div class="pill">ASan/TSan</div>
+                        <div class="pill">perf</div>
+                        <div class="pill">Wireshark</div>
+                        <div class="pill">Docker</div>
                     </div>
                 </div>
                 <div class="card box" role="listitem">
@@ -153,7 +230,6 @@
                 <div class="card box" role="listitem">
                     <h3>Знакомые языки</h3>
                     <div class="pillset" aria-label="Языки программирования (чтение кода, изучение)">
-                        <div class="pill">Rust</div>
                         <div class="pill">Python</div>
                         <div class="pill">Bash</div>
                         <div class="pill">C# (.Net)</div>
@@ -162,32 +238,13 @@
                         <div class="pill">Java</div>
                     </div>
                 </div>
-
-                <div class="card box" role="listitem">
-                    <h3>Контроль версий</h3>
-                    <div class="pillset" aria-label="Системы контроля версий">
-                        <div class="pill">SVN</div>
-                        <div class="pill">Git</div>
-                        <div class="pill">GitHub API</div>
-                        <div class="pill">GitLab</div>
-                    </div>
-                </div>
-
                 <div class="card box" role="listitem">
                     <h3>Инженерные практики</h3>
                     <div class="pillset" aria-label="Практики">
                         <div class="pill">Модульные приложения</div>
                         <div class="pill">VoIP</div>
                         <div class="pill">Геоинформационные системы</div>
-                    </div>
-                </div>
-                <div class="card box" role="listitem">
-                    <h3>IDE</h3>
-                    <div class="pillset" aria-label="Инструменты">
-                        <div class="pill">Visual Studio Code</div>
-                        <div class="pill">CLion</div>
-                        <div class="pill">Visual Studio</div>
-                        <div class="pill">QtCreator</div>
+                        <div class="pill">Рефакторинг</div>
                     </div>
                 </div>
             </div>
@@ -204,7 +261,11 @@
                         <b>НЕОС — Инженер‑программист</b>
                         <time id="tenure" datetime="2025-07"></time>
                     </div>
-                    <p>Разработка ПО в области VoIP-телефонии.</p>
+                    <p>
+                        Разработка высоконагруженного ПО на C++ для сетей связи: SIP/RTP, протоколы мобильных сетей
+                        (SIGTRAN, GTP), захват и обработка пакетов (DPDK, AF_PACKET TPACKET_V3), отладка санитайзерами,
+                        профилирование perf.
+                    </p>
                 </div>
 
                 <div class="job" role="listitem">
@@ -237,6 +298,8 @@
                 <li>СПбГЭТУ «ЛЭТИ» им. В. И. Ульянова (Ленина), Санкт‑Петербург.</li>
                 <li>Специальность: 10.05.01 Компьютерная безопасность.</li>
                 <li>Год окончания: <time datetime="2025">2025</time></li>
+                <li>Аспирантура с <time datetime="2025">2025</time> года: 2.3.6 «Методы и системы защиты информации,
+                    информационная безопасность», направление — безопасность VoIP-телефонии.</li>
             </ul>
         </section>
     </main>

@@ -136,6 +136,23 @@ h1 a img:active {
     font-size: 16px;
 }
 
+.about,
+.project p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.project p {
+    margin-bottom: 10px;
+}
+
+.about a,
+.project a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
 .timeline {
     display: grid;
     gap: 12px;
