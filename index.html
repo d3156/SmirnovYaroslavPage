@@ -33,9 +33,15 @@
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/logo.css">
     <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/faces.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap">
 </head>
 
 <body>
+    <div class="stage" data-face="eng">
+    <div class="face eng">
     <div class="nav">
         <div class="wrap">
             <div class="row">
@@ -46,6 +52,11 @@
                     </span>
                     <div id="rotating" class="wipe"></div>
                 </div>
+                <button class="switch" type="button" data-to="lyr" aria-label="Перейти к рассказам">
+                    <span class="sw-knob" aria-hidden="true"></span>
+                    <span class="sw-opt sw-eng">Инженер</span>
+                    <span class="sw-opt sw-lyr">Писатель</span>
+                </button>
                 <nav class="menu home-nav" aria-label="Навигация">
                     <a class="chip" href="#about">Обо мне</a>
                     <a class="chip" href="#projects">Проекты</a>
@@ -128,6 +139,36 @@
     </header>
 
     <main class="wrap">
+        <section id="brochures" class="card box">
+            <div class="section-title">
+                <h2>Как инженер решает задачи</h2>
+                <p>Набор брошюр</p>
+            </div>
+            <p class="lead">Единый метод решения задач под неполным знанием — от общего инженерного подхода к частным
+                приёмам.</p>
+            <div class="brochures">
+                <div class="brochure"><span class="num mono">01</span><b>Общий инженерный подход к любым задачам</b>
+                    <p>Метод как таковой, без привязки к разработке, в границах задач с дешёвым и обратимым витком.</p>
+                </div>
+                <div class="brochure"><span class="num mono">02</span><b>Управление рисками</b>
+                    <p>Цена промаха как рабочая величина: почему выкупать нужно не все посылки, а смертельные.</p>
+                </div>
+                <div class="brochure"><span class="num mono">03</span><b>Как инженер решает задачи с необратимыми
+                        последствиями</b>
+                    <p>Суррогатный виток вместо настоящего и единственный необратимый проход в конце.</p>
+                </div>
+                <div class="brochure"><span class="num mono">04</span><b>Приложение к разработке</b>
+                    <p>Тот же метод на софте: минимальный читаемый диф как условие приёмки, проверка гипотез фактом.</p>
+                </div>
+                <div class="brochure"><span class="num mono">05</span><b>Как учить исполнителя</b>
+                    <p>Кого учат, а что настраивают: инженера проводят по полному циклу, ИИ настраивают правилами.</p>
+                </div>
+                <div class="brochure"><span class="num mono">06</span><b>Метод на уровне компании</b>
+                    <p>Управление проектами — это метод, а не учёт: задача против таска и репозиторий решений.</p>
+                </div>
+            </div>
+        </section>
+
         <section id="about" class="card box">
             <div class="section-title">
                 <h2>Обо мне</h2>
@@ -343,6 +384,90 @@
             </div>
         </div>
     </footer>
+    </div>
+
+    <div class="face lyr" id="proza">
+        <div class="nav">
+            <div class="wrap">
+                <div class="row">
+                    <div class="brand">
+                        <svg class="flame" viewBox="0 0 14 20" aria-hidden="true">
+                            <defs>
+                                <radialGradient id="flame-fill" cx="50%" cy="70%" r="60%">
+                                    <stop offset="0" stop-color="#fff6d8" />
+                                    <stop offset=".45" stop-color="#ffc46b" />
+                                    <stop offset="1" stop-color="#e2682c" />
+                                </radialGradient>
+                            </defs>
+                            <path d="M7 0C8.6 4.2 13 7.4 13 12.6 13 16.7 10.3 19.6 7 19.6S1 16.7 1 12.6C1 9.4 3 7.6 4.4 5.6 4.8 7.6 5.6 8.6 6.6 9 6.2 5.8 6.4 3 7 0Z"
+                                fill="url(#flame-fill)" />
+                        </svg>
+                        <span>Ярослав Смирнов</span>
+                    </div>
+                    <button class="switch" type="button" data-to="eng" aria-label="Перейти к инженерной части">
+                        <span class="sw-knob" aria-hidden="true"></span>
+                        <span class="sw-opt sw-eng">Инженер</span>
+                        <span class="sw-opt sw-lyr">Писатель</span>
+                    </button>
+                    <nav class="menu" aria-label="Навигация">
+                        <a class="chip" href="#books">Книги</a>
+                        <a class="chip" href="https://www.litres.ru/author/yaroslav-vladimirovich-smirnov/?o=written_at"
+                            target="_blank" rel="noreferrer">ЛитРес ↗</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <header class="wrap">
+            <div class="card hero-main">
+                <div class="kicker">Рассказы и сборники</div>
+                <h1>Ярослав Смирнов</h1>
+                <p class="motto">Разумом — инженер. Душой — писатель.</p>
+                <a class="chip warm" href="https://www.litres.ru/author/yaroslav-vladimirovich-smirnov/?o=written_at"
+                    target="_blank" rel="noreferrer">Все книги на ЛитРес ↗</a>
+            </div>
+        </header>
+        <main class="wrap">
+            <section id="books">
+                <div class="section-title">
+                    <h2>Книги</h2>
+                    <p>на ЛитРес</p>
+                </div>
+                <div class="books">
+                    <a class="book" href="https://www.litres.ru/book/yaroslav-vladimirovich-smirnov/sygraem-24504192/"
+                        target="_blank" rel="noreferrer">
+                        <div class="cover"><img src="./assets/img/books/sygraem.jpg" alt="Обложка «Сыграем?»" loading="lazy"></div>
+                        <h3>Сыграем?</h3>
+                        <p>«Это мой небольшой эксперимент. Я предлагаю вам сыграть».</p>
+                        <span class="more">Читать на ЛитРес →</span>
+                    </a>
+                    <a class="book"
+                        href="https://www.litres.ru/book/yaroslav-vladimirovich-smirnov/nora-ili-gimalayskaya-sakura-24918189/"
+                        target="_blank" rel="noreferrer">
+                        <div class="cover"><img src="./assets/img/books/nora.jpg" alt="Обложка «Нора или Гималайская Сакура»" loading="lazy"></div>
+                        <h3>Нора<small>или Гималайская Сакура</small></h3>
+                        <p>«Короткий рассказ о встрече Марии и Альберта».</p>
+                        <span class="more">Читать на ЛитРес →</span>
+                    </a>
+                    <a class="book"
+                        href="https://www.litres.ru/book/yaroslav-vladimirovich-smirnov/proch-iz-moei-golovy-sbornik-rasskazov-74940013/"
+                        target="_blank" rel="noreferrer">
+                        <div class="cover"><img src="./assets/img/books/proch.jpg" alt="Обложка «Прочь из моей головы»" loading="lazy"></div>
+                        <h3>Прочь из моей головы<small>сборник рассказов</small></h3>
+                        <p>«Все бывает в первый раз, и все когда-то заканчивается».</p>
+                        <span class="more">Читать на ЛитРес →</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+        <footer class="wrap">
+            <div class="foot">© Ярослав Смирнов</div>
+        </footer>
+    </div>
+
+    <div class="leaf-back" aria-hidden="true"></div>
+    <div class="fold-shade" aria-hidden="true"></div>
+    <div class="scan" aria-hidden="true"></div>
+    </div>
     <script>
         function monthDiff(start, end) { return Math.max(0, (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1); }
         function plural(n, one, few, many) { const m10 = n % 10, m100 = n % 100; return m10 === 1 && m100 !== 11 ? one : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? few : many; }
@@ -351,6 +476,7 @@
         document.getElementById("y").textContent = new Date().getFullYear();
     </script>
     <script defer src="./assets/js/rotating-title.js"></script>
+    <script defer src="./assets/js/faces.js"></script>
 </body>
 
 </html>
